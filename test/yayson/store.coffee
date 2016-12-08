@@ -17,8 +17,14 @@ describe 'Store', ->
       id: 1
       attributes:
         name: 'Demo'
+      meta:
+        is_blessed: true
+      links:
+        demo_gods_homepage: 'https://api.example.com/v1/demo_gods'
 
     expect(event.name).to.equal 'Demo'
+    expect(event.meta.is_blessed).to.equal true
+    expect(event.links.demo_gods_homepage).to.equal 'https://api.example.com/v1/demo_gods'
 
   it 'should find an event', ->
     @store.sync data:
@@ -26,11 +32,17 @@ describe 'Store', ->
       id: 1
       attributes:
         name: 'Demo'
+      meta:
+        is_blessed: true
+      links:
+        demo_gods_homepage: 'https://api.example.com/v1/demo_gods'
 
     event = @store.find 'events', 1
     expect(event.id).to.equal 1
     expect(event.type).to.equal 'events'
     expect(event.name).to.equal 'Demo'
+    expect(event.meta.is_blessed).to.equal true
+    expect(event.links.demo_gods_homepage).to.equal 'https://api.example.com/v1/demo_gods'
 
   it 'should handle relations with duplicates', ->
     @store.sync

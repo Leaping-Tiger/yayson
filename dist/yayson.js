@@ -10,19 +10,19 @@ _ = this.window._;
 Q || (Q = ((function() {
   try {
     return typeof require === "function" ? require('q') : void 0;
-  } catch (_error) {}
+  } catch (error) {}
 })()));
 
 _ || (_ = ((function() {
   try {
     return typeof require === "function" ? require('lodash/dist/lodash.underscore') : void 0;
-  } catch (_error) {}
+  } catch (error) {}
 })()));
 
 _ || (_ = ((function() {
   try {
     return typeof require === "function" ? require('underscore') : void 0;
-  } catch (_error) {}
+  } catch (error) {}
 })()));
 
 utils = require('./yayson/utils')(_, Q);
@@ -5329,7 +5329,7 @@ module.exports = function(utils) {
   var Record, Store;
   Record = (function() {
     function Record(options) {
-      this.id = options.id, this.type = options.type, this.attributes = options.attributes, this.relationships = options.relationships;
+      this.id = options.id, this.type = options.type, this.attributes = options.attributes, this.relationships = options.relationships, this.meta = options.meta, this.links = options.links;
     }
 
     return Record;
@@ -5350,6 +5350,8 @@ module.exports = function(utils) {
       model = utils.clone(rec.attributes) || {};
       model.id = rec.id;
       model.type = rec.type;
+      model.meta = rec.meta;
+      model.links = rec.links;
       models[type] || (models[type] = {});
       (base = models[type])[name = rec.id] || (base[name] = model);
       if (rec.relationships != null) {

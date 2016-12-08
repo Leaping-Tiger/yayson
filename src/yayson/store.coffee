@@ -3,7 +3,7 @@ module.exports = (utils) ->
 
   class Record
     constructor: (options) ->
-      {@id, @type, @attributes, @relationships} = options
+      {@id, @type, @attributes, @relationships, @meta, @links} = options
 
   class Store
     constructor: (options) ->
@@ -17,6 +17,8 @@ module.exports = (utils) ->
       model = utils.clone(rec.attributes) || {}
       model.id = rec.id
       model.type = rec.type
+      model.meta = rec.meta
+      model.links = rec.links
       models[type] ||= {}
       models[type][rec.id] ||= model
       if rec.relationships?
